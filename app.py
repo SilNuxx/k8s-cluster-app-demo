@@ -20,7 +20,7 @@ def metrics():
 def cpu_intensive():
     REQUEST_COUNT.inc()
     CPU_INTENSIVE_COUNT.inc()
-    for i in range(1000000000):
+    for i in range(10000):
         random.random()
     return 'CPU intensive task completed!\n'
 
