@@ -9,4 +9,4 @@ spec:
     matchLabels:
       app: k8s-app-demo
   podMetricsEndpoints:
-  - portNumber: 2025
+  - port: main
