@@ -15,14 +15,14 @@ spec:
         app: k8s-app-demo
       annotations:
         prometheus.io/scrape: "true"
-        prometheus.io/port: "8080"
+        prometheus.io/port: "2025"
         prometheus.io/path: "/metrics"
     spec:
       containers:
       - name: k8s-app-demo
         image: silnux/k8s-app-demo:v0
         ports:
-        - containerPort: 8080
+        - containerPort: 2025
         resources:
           requests:
             cpu: 100m
