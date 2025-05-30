@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: k8s-app-demo
-        image: silnux/k8s-app-demo:v0
+        image: silnux/k8s-app-demo:latest
         ports:
         - name: web
           containerPort: 8080
