@@ -44,13 +44,3 @@ spec:
       app: k8s-app-demo
   podMetricsEndpoints:
   - port: web
----
-apiVersion: monitoring.coreos.com/v1
-kind: Prometheus
-metadata:
-  name: prometheus
-spec:
-  serviceAccountName: prometheus
-  podMonitorSelector:
-    matchLabels:
-      team: frontend
