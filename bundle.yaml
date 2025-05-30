@@ -22,7 +22,7 @@ spec:
       - name: k8s-app-demo
         image: silnux/k8s-app-demo:v0
         ports:
-        - name: main
+        - name: web
           containerPort: 2025
         resources:
           requests:
@@ -43,7 +43,7 @@ spec:
     matchLabels:
       app: k8s-app-demo
   podMetricsEndpoints:
-  - port: main
+  - port: web
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
