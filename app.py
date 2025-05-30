@@ -25,4 +25,4 @@ def cpu_intensive():
     return 'CPU intensive task completed!\n'
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=2025)
+    app.run(host="0.0.0.0", port=8080)
