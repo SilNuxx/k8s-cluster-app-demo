@@ -29,8 +29,8 @@ spec:
             cpu: 100m
             memory: 100Mi
           limits:
-            cpu: 500m
-            memory: 200Mi
+            cpu: 2000m
+            memory: 2048Mi
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
@@ -52,18 +52,18 @@ metadata:
   namespace: default
 spec:
   groups:
-    # - name: http-requests-alert
-    #   rules:
-    #   - alert: HighHttpRequests
-    #     expr: rate(http_requests_total{namespace!="", pod!=""}[2m]) > 0
-    #     for: 2m
-    #     labels:
-    #       severity: warning
-    #     annotations:
-    #       summary: "High HTTP requests detected"
-    #       description: "HTTP requests are above the threshold for more than 2 minutes."
+    - name: http-requests-alert
+      rules:
+      - alert: HighHttpRequests
+        expr: rate(http_requests_total{namespace!="", pod!=""}[1m]) > 10
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High HTTP requests detected"
+          description: "HTTP requests are above the threshold for more than 2 minutes."
     - name: http-requests-record
       rules:
-      - record: job:http_requests_per_two_minutes:rate
-        expr: rate(http_requests_total[2m]) by (job)
+      - record: http_requests_per_minute
+        expr: rate(http_requests_total{namespace!="", pod!=""}[1m])
 
