@@ -44,3 +44,25 @@ spec:
       app: k8s-app-demo
   podMetricsEndpoints:
   - port: web
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: demo-app-rules
+  namespace: default
+spec:
+  groups:
+    - name: DemoAppRule
+      rules:
+        - seriesQuery: 'http_requests_total{namespace!="",pod!=""}'
+          resources:
+            overrides:
+              namespace:
+                resource: namespace
+              pod:
+                resource: pod
+          name:
+            matches: "^(.*)_total"
+            as: "${1}_per_second"
+          metricsQuery: |
+            rate(<<.Series>>{<<.LabelMatchers>>}[2m])
