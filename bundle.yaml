@@ -62,8 +62,8 @@ spec:
         annotations:
           summary: "High HTTP requests detected"
           description: "HTTP requests are above the threshold for more than 2 minutes."
-    - name: http-requests-record
-      rules:
-      - record: http_requests_per-two-minutes
-        expr: rate(http_requests_total{namespace!="", pod!=""}[2m])
+    # - name: http-requests-record
+    #   rules:
+    #   - record: http_requests_per-two-minutes
+    #     expr: rate(http_requests_total{namespace!="", pod!=""}[2m])
 
