@@ -1,6 +1,5 @@
 apiVersion: apps/v1
-# Разворачиваем веб-приложение в кластере
-kind: Deployment 
+kind: Deployment
 metadata:
   name: k8s-app-demo
   labels:
@@ -34,8 +33,7 @@ spec:
             memory: 200Mi
 ---
 apiVersion: monitoring.coreos.com/v1
-# Создаем ресурс, который будет собирать метрики
-kind: PodMonitor 
+kind: PodMonitor
 metadata:
   name: k8s-app-demo
   labels:
@@ -48,8 +46,7 @@ spec:
   - port: web
 ---
 apiVersion: monitoring.coreos.com/v1
-# Создаем ресурс-правило, по которому из полученных метрик генерируется метрика для расширения
-kind: PrometheusRule 
+kind: PrometheusRule
 metadata:
   name: k8s-demo-app-rule
   namespace: default
