@@ -48,7 +48,7 @@ spec:
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: k8s-demo-app-rule
+  name: k8s-app-demo-rule
   namespace: default
 spec:
   groups:
