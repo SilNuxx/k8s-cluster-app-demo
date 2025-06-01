@@ -64,6 +64,6 @@ spec:
     #       description: "HTTP requests are above the threshold for more than 2 minutes."
     - name: http-requests-record
       rules:
-      - record: http_requests_per-two-minutes
-        expr: rate(http_requests_total{namespace!="", pod!=""}[2m])
+      - record: http-requests-per-two-minutes
+        expr: sum(rate(http_requests_total{namespace!="", pod!=""}[2m]))
 
