@@ -48,11 +48,11 @@ spec:
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: custom-http-requests
-  namespace: monitoring
+  name: k8s-demo-app-rule
+  namespace: default
 spec:
   groups:
-    - name: custom-metrics
+    - name: http-requests-per-two-minutes
       rules:
         - alert: HighHttpRequests
           expr: rate(http_requests_total{namespace!="", pod!=""}[2m]) > 0
