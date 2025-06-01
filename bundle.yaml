@@ -52,18 +52,18 @@ metadata:
   namespace: default
 spec:
   groups:
-    - name: http-requests-alert
-      rules:
-      - alert: HighHttpRequests
-        expr: rate(http_requests_total{namespace!="", pod!=""}[2m]) > 0
-        for: 2m
-        labels:
-          severity: warning
-        annotations:
-          summary: "High HTTP requests detected"
-          description: "HTTP requests are above the threshold for more than 2 minutes."
-    # - name: http-requests-record
+    # - name: http-requests-alert
     #   rules:
-    #   - record: http_requests_per-two-minutes
-    #     expr: rate(http_requests_total{namespace!="", pod!=""}[2m])
+    #   - alert: HighHttpRequests
+    #     expr: rate(http_requests_total{namespace!="", pod!=""}[2m]) > 0
+    #     for: 2m
+    #     labels:
+    #       severity: warning
+    #     annotations:
+    #       summary: "High HTTP requests detected"
+    #       description: "HTTP requests are above the threshold for more than 2 minutes."
+    - name: http-requests-record
+      rules:
+      - record: http_requests_per-two-minutes
+        expr: rate(http_requests_total{namespace!="", pod!=""}[2m])
 
