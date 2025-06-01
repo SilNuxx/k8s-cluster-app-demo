@@ -48,21 +48,17 @@ spec:
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: demo-app-rules
-  namespace: default
+  name: custom-http-requests
+  namespace: monitoring
 spec:
   groups:
-    - name: DemoAppRule
+    - name: custom-metrics
       rules:
-        - seriesQuery: 'http_requests_total{namespace!="",pod!=""}'
-          resources:
-            overrides:
-              namespace:
-                resource: namespace
-              pod:
-                resource: pod
-          name:
-            matches: "^(.*)_total"
-            as: "${1}_per_second"
-          metricsQuery: |
-            rate(<<.Series>>{<<.LabelMatchers>>}[2m])
+        - alert: HighHttpRequests
+          expr: rate(http_requests_total{namespace!="", pod!=""}[2m]) > 0
+          for: 2m
+          labels:
+            severity: warning
+          annotations:
+            summary: "High HTTP requests detected"
+            description: "HTTP requests are above the threshold for more than 2 minutes."
