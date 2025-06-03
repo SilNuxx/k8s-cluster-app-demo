@@ -32,6 +32,22 @@ spec:
             cpu: 2000m
             memory: 2048Mi
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: k8s-app-demo
+  name: k8s-app-demo
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: k8s-app-demo
+  type: ClusterIP
+---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
@@ -66,4 +82,23 @@ spec:
       rules:
       - record: http_requests_per_minute
         expr: rate(http_requests_total{namespace!="", pod!=""}[1m])
-
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: k8s-app-demo-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: k8s-app-demo
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Pods
+    pods:
+      metric:
+        name: http_requests
+      target:
+        type: AverageValue
+        averageValue: "5000m"
