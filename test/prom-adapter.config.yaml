@@ -12,7 +12,7 @@ data:
         "template": "<<.Resource>>"
       "name":
         "matches": "^(.*)_total"
-        "as": ""
+        "as": "http_requests_per_minute"
       "metricsQuery": |
         sum by (<<.GroupBy>>) (
           irate (
