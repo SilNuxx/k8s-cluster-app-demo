@@ -32,22 +32,6 @@ spec:
             cpu: 1000m
             memory: 1024Mi
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: k8s-app-demo
-  name: k8s-app-demo
-spec:
-  ports:
-  - name: web
-    port: 8080
-    protocol: TCP
-    targetPort: 8080
-  selector:
-    app: k8s-app-demo
-  type: ClusterIP
----
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
