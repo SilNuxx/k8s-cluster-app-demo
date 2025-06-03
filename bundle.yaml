@@ -40,7 +40,7 @@ metadata:
   name: k8s-app-demo
 spec:
   ports:
-  - name: http
+  - name: web
     port: 80
     protocol: TCP
     targetPort: 8080
