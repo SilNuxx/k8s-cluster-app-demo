@@ -12,3 +12,17 @@ kind: L2Advertisement
 metadata:
   name: k8s-app-demo-l2
   namespace: metallb-system
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-app-demo-lb
+  annotations:
+    metallb.io/loadBalancerIPs: 192.168.0.100
+spec:
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: k8s-app-demo
+  type: LoadBalancer
